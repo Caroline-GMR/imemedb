@@ -1,21 +1,55 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{ title }}!
-  </h1>
-  <img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
-</div>
-<h2>Here are some links to help you start: </h2>
-<ul>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://github.com/angular/angular-cli/wiki">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
-  </li>
-</ul>
+<header id="site-header">
+  <div class="container">
 
-<router-outlet></router-outlet>
+    <h1 class="site-title"></h1>
+
+    <nav class="site-nav">
+      Imemedb
+    </nav>
+
+  </div>
+</header>
+
+<div id="site-main" class="container">
+  <h1>List of memes</h1>
+  <app-loading  *ngIf="loading"></app-loading>
+  <form>
+
+    <div class="editing">
+      <h2>Add another one</h2>
+      <input type="text" [(ngModel)]="newMeme.lineOne" name="lineOne">
+      <input type="text" [(ngModel)]="newMeme.lineTwo" name="lineTwo">
+      <select name="category" [(ngModel)]="newMeme.category">
+        <option value="">--> Choose one <--</option>
+        <option value="not-simply">Not simply</option>
+        <option value="waiting">Waiting</option>
+        <option value="other">Other</option>
+      </select>
+      <button (click)="handleAddClick()">Add!</button>
+    </div>
+
+    <div class="card preview">
+      <h2>{{newLineOne}}</h2>
+      <h3>{{newLineTwo}}</h3>
+      <img *ngIf="newMeme.category" [src]="imgs[newMeme.category]">
+    </div>
+  </form>
+
+  <ul *ngIf="!loading">
+    <li class="card" *ngFor="let meme of memes">
+      <h2>{{meme.lineOne}}</h2>
+      <h3>{{meme.lineTwo}}</h3>
+      <img [src]="imgs[meme.category]">
+      <button (click)="handleDeleteClick(meme._id)">Delete</button>
+    </li>
+  </ul>
+  <div *ngIf="!loading && !memes.length">
+    No memes in this list, yet! Care to add one?
+  </div>
+</div>
+
+<footer id="site-footer">
+  <div class="container">
+    Made with love in Ironhack BCN (October 2018)
+  </div>
+</footer>

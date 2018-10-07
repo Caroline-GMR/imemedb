@@ -1,0 +1,36 @@
+
+
+.card {
+  position: relative;
+  height: 400px;
+  width: 400px;
+  overflow: hidden;
+  margin-bottom: 20px;
+
+  img {
+    height: 100%;
+  }
+
+  h2 {
+    position: absolute;
+    top: 20px;
+    width: 100%;
+    background: black;
+    color: white;
+    text-align: center;
+  }
+
+  h3 {
+    position: absolute;
+    bottom: 20px;
+    width: 100%;
+    background: black;
+    color: white;
+    text-align: center;
+  }
+
+  button {
+    position: absolute;
+    top: 0;
+  }
+}
